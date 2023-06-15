@@ -5,27 +5,33 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
 
+	private static Logger logger = LoggerFactory.getLogger(Main.class);
+	
+	
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException
 	{
 		while (true)
 		{
-			System.out.println("Connecting...");
+			logger.info("Connecting...");
 			Socket socket = new Socket("generator", 3100);
 
-			System.out.println("Sending command");
+			logger.info("Sending command");
 			OutputStreamWriter writer =new OutputStreamWriter(socket.getOutputStream());
 			writer.write("get");
 			writer.flush();
 
-			System.out.println("Reading answer...");
+			logger.info("Reading answer...");
 			// ???
 			
-			System.out.println("Closing...");
+			logger.info("Closing...");
 			socket.close();
 
-			System.out.println("Closed.");
+			logger.info("Closed.");
 			
 			Thread.sleep(5000);
 		}
