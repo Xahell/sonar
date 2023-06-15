@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import client.Main;
+
 /**
  * Transforms a text by replacing a set of tokens by
  * predefined values.
@@ -18,6 +23,8 @@ import java.util.regex.Pattern;
  * @author Administrateur
  */
 public class Transformer {
+
+	private static Logger logger = LoggerFactory.getLogger(Transformer.class);
 	
 	private Map<String, String> tokens = new HashMap<String, String>();
 	
@@ -85,6 +92,6 @@ public class Transformer {
 		georgeTransformer.addToken("phone", "03 54 87 69 88");
 		georgeTransformer.addToken("company", "Amazon");
 		
-		System.out.println(georgeTransformer.transform("Bonjour {name}, comment vas-tu {name} ?"));
+		logger.info(georgeTransformer.transform("Bonjour {name}, comment vas-tu {name} ?"));
 	}
 }

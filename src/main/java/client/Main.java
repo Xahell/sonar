@@ -18,20 +18,18 @@ public class Main {
 		while (true)
 		{
 			logger.info("Connecting...");
-			Socket socket = new Socket("generator", 3100);
+			try (Socket socket = new Socket("generator", 3100))
+			{
+				logger.info("Sending command");
+				OutputStreamWriter writer =new OutputStreamWriter(socket.getOutputStream());
+				writer.write("get");
+				writer.flush();
 
-			logger.info("Sending command");
-			OutputStreamWriter writer =new OutputStreamWriter(socket.getOutputStream());
-			writer.write("get");
-			writer.flush();
-
-			logger.info("Reading answer...");
-			// ???
-			
-			logger.info("Closing...");
-			socket.close();
-
-			logger.info("Closed.");
+				logger.info("Reading answer...");
+				// ???
+				
+				logger.info("End.");
+			}
 			
 			Thread.sleep(5000);
 		}
